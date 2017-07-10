@@ -1,0 +1,268 @@
+label.error {
+    color: red;
+    margin-left: 10px;
+}
+input.error {
+    border-color: red;
+}
+.modal-error {
+    background-color: #f7c5c5;
+}
+.modal-warning {
+    background-color: #f3d653;
+}
+.modal-success {
+    background-color: #78e68b;
+}
+/* Màn hình login default */
+img#img-logo {
+    max-width: 300px;
+}
+
+div#d-content-login {
+    text-align: center;
+    margin-top: 5%;
+}
+
+form#f-login {
+    text-align: left;
+    padding: 10px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form#f-login input {
+    margin-bottom: 10px;
+}
+
+button#btn-submit {
+    float: right;
+}
+
+.head-1, .head-2, .head-3, .head-4, .head-5 {
+    font-weight: bold;
+    text-shadow: 2px 1px 1px #925f5f;
+}
+
+.div-error {
+    padding: 5px;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #fb0a05;
+}
+
+div#d-contain {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.d-clear {
+    clear: both;
+}
+
+div#d-content {
+    float: left;
+    left: 20%;
+    width: 80%;
+    height: 100%;
+    overflow: auto;
+}
+
+div#d-navigation {
+    float: left;
+    display: block;
+    width: 20%;
+    height: 100%;
+    border-right: 1px solid gray;
+}
+
+/* Menu */
+ul {
+    list-style: none;
+    padding: 0px;
+}
+div#menu {
+    font-size: 2em;
+    font-weight: bold;
+    height: 50px;
+    padding: 5px;
+    color: ivory;
+    background-color: black;
+    overflow: hidden;
+}
+
+i#btn-show-menu {
+    float: right;
+    padding: 5px;
+    cursor: pointer;
+}
+ul#sub-memu li i {
+    margin-right: 10px;
+    width: 30px;
+}
+ul#sub-memu li {
+    border-top: 1px solid lightgray;
+    height: 45px;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 10px;
+    transition: all 0.3s;
+    overflow: hidden;
+}
+ul#sub-memu li:hover {
+    background-color: aqua;
+    text-transform: capitalize;
+}
+li.active {
+    background-color: aliceblue;
+    cursor: no-drop !important;
+}
+div#user-login p {
+    margin: 5px 5px;
+    font-weight: 600;
+}
+div#user-login {
+    border: 5px solid gray;
+    padding: 5px;
+}
+i.fa-even {
+    float: right;
+    font-size: 1.5em;
+    margin: 0px 5px;
+    cursor: pointer;
+}
+/* Màn hình branch(Chi nhánh) */
+strong#tittle {
+    border-bottom: 1px solid gray;
+    height: 50px;
+    display: block;
+    font-size: 2em;
+    padding: 5px;
+    color: #791a1a;
+    text-shadow: 1px 1px 2px #eaa7a7;
+}
+.ctr-1x {
+    margin: 10px 0px 0px 10px;
+    max-width: 98%;
+}
+.ctr-3x {
+    max-width: 32%;
+    float: left !important;
+    margin: 10px 0px 0px 10px;
+}
+.ctr-btn {
+    width: 120px;
+    float: right;
+    margin: 10px 10px 0px 0px;
+}
+.d-table {
+    margin-top: 10px;
+    border-top: 2px solid gray;
+}
+td.col-phone {
+    width: 200px;
+}
+td.col-action {
+    width: 100px;
+}
+td.col-action i {
+    margin-left: 10px;
+    cursor: pointer;
+}
+td.col-action i:hover {
+    border: 1px solid #ca8c8c;
+    padding: 5px;
+    border-radius: 10px;
+    background-color: aqua;
+}
+td#viewmore:hover i {
+    background-color: limegreen;
+    padding: 3px 5px;
+    border-radius: 5px;
+    color: white;
+}
+td#viewmore i {
+    margin-right: 10px;
+}
+td#viewmore {
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+}
+.icon-btn {
+    float: left;
+    margin-top: 3px;
+}
+#d-waiting {
+    background-color: lightgray;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    opacity: 0.6;
+    padding-top: 25%;
+}
+/* Man hinh warehouse - Kho hang */
+#add-head {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+/* Man hinh dien thoai */
+@media all and (max-width: 599px) {
+    div#d-navigation {
+        width: 100%;
+        height: initial;
+        float: none;
+        position: absolute;
+    }
+    ul#sub-memu {
+        display: none;
+        z-index: 1;
+        background-color: white;
+        position: absolute;
+        width: 100%;
+        overflow: auto;
+        border-bottom: 1px solid darkred;
+    }
+    strong#tittle {
+        font-size: 1.8em;
+    }
+    div#d-content {
+        margin-top: 50px;
+        width: 100%;
+        height: initial;
+    }
+    .ctr-1x, .ctr-3x {
+        max-width: 93%;
+        float: none !important;
+    }
+    div#user-login {
+        display: none;
+    }
+}
+
+/* Man hinh IPad */
+@media all and (min-width: 600px) and (max-width: 1023px) {
+    div#d-navigation {
+        width: 45px;
+    }
+    div#menu span, ul#sub-memu li span {
+        display: none;
+    }
+    div#d-content {
+        width: 90%;
+    }
+    div#user-login {
+        display: none;
+    }
+}
+/* Man hinh lap top */
+@media all and (min-width: 1024px) {
+    
+}

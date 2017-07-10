@@ -1,0 +1,11 @@
+{
+    "/" : "GET",
+    "/dang-nhap" : "POST",
+    "/dang-xuat" : "GET",
+    "/chi-nhanh" : "GET",
+    "/thong-tin/chi-nhanh/i" : "GET",
+    "/chi-nhanh/i" : "GET",
+    "/search/chi-nhanh" : "GET",
+    "/update/chi-nhanh" : "POST",
+    "/delete/chi-nhanh/i" : "GET"
+}

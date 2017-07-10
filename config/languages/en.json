@@ -1,0 +1,11 @@
+{
+    "404-title": "EN : Lỗi truy cập trang",
+    "404-massage": "EN : Lỗi truy cập trang",
+    "login-title": "EN : Đăng nhập hệ thống",
+    "login-label-username": "EN : Tên đăng nhập",
+    "login-placeholder-username": "EN : Nhập tại đây ...",
+    "login-label-password": "EN : Mật khẩu",
+    "login-placeholder-password": "EN : Nhập tại đây ...",
+    "login-button": "EN : Đăng nhập",
+    "login-massage-error": "EN : Tên đăng nhập hoặc mật khẩu không chính xác!!!"
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Quản lý hệ thống tạp hóa</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <% include files/_header.ejs %>
+    </head>
+    <body>
+        <div id="d-contain">
+            <% include files/_menu.ejs %>
+
+            <div id="d-content">
+                <% if(screen === 0) { %>
+                    <% include details/branch.ejs %>
+                <% } else if(screen === 1) { %>
+                    <% include details/personnel.ejs %>
+                <% } else if(screen === 2) { %>
+                    <% include details/category.ejs %>
+                <% } else if(screen === 3) { %>
+                    <% include details/partner.ejs %>
+                <% } else if(screen === 4) { %>
+                    <% include details/warehouse.ejs %>
+                <% } else if(screen === 10) { %>
+                    <% include infos/branch.ejs %>
+                <% } else if(screen === 11) { %>
+                    <% include infos/branch.ejs %>
+                <% } else if(screen === 12) { %>
+                    <% include infos/branch.ejs %>
+                <% } else if(screen === 13) { %>
+                    <% include infos/branch.ejs %>
+                <% } else if(screen === 14) { %>
+                    <% include infos/branch.ejs %>
+                <% } else if(screen === 15) { %>
+                    <% include infos/branch.ejs %>
+                <% } else { %>
+                    Không có dữ liệu
+                <% } %>
+            </div>
+
+            <div class="d-clear"></div>
+        </div>
+        
+        <% include files/_footer.ejs %>
+    </body>
+</html>

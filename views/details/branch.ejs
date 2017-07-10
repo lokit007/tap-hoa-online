@@ -1,0 +1,101 @@
+<strong id="tittle">Thông tin chi nhánh</strong>
+<% if(session.jurisdiction < 2) { %>
+<form action="#" name='f-update' method="POST" autocomplete="on">
+    <input type="hidden" id="key" name="key" value="-1" />
+    <input type="text" id="name" name="namebranch" class="search-control form-control ctr-1x" data="branch" title="Tên chi nhánh hoặc điều kiện tìm kiếm dữ liệu" placeholder="(*) Nhập tên chi nhánh hoặc điều kiện tìm kiếm ..." />
+    <input type="text" id="address" class="form-control ctr-1x" name="addressbranch"  title="Địa chỉ chi nhánh" placeholder="(*) Địa chỉ ..." />
+    <div>
+        <div class="ctr-3x">
+            <input type="tel" id="phone" class="form-control" name="phonebranch"  title="Số điện thoại" maxlength="11" placeholder="(*) Số điện thoại ..." />
+        </div>
+        <div class="ctr-3x">
+            <input type="email" id="email" class="form-control" name="emailbranch" title="Email" maxlength="30" placeholder="Email ..." />
+        </div>
+        <div class="ctr-3x">
+            <input type="text" id="fax" class="form-control" name="faxbranch" title="Fax" maxlength="11" placeholder="Số fax ..." />
+        </div>    
+        <div class="ctr-3x" style="float: right !important; margin-right: 10px;">
+            <span id="chitiet" class="fa-stack fa-lg" style="cursor: pointer;" title="Xem chi tiết">
+                <i class="fa fa-square-o fa-stack-2x"></i>
+                <i class="fa fa-info fa-stack-1x"></i>
+            </span>
+        </div>
+        <div class="d-clear"></div>
+    </div>
+    <button type="button" id="delete" class="btn btn-danger btn-sm ctr-btn" disabled><i class="fa fa-trash-o" aria-hidden="true"></i> Xóa Chi nhánh</button>
+    <button type="submit" id="update" class="btn btn-success btn-sm ctr-btn" disabled><i class="fa fa-check" aria-hidden="true"></i> Cập nhật lại</button>
+    <button type="submit" id="add" class="btn btn-primary btn-sm ctr-btn"><i class="fa fa-plus" aria-hidden="true"></i> Thêm Chi nhánh</button>
+</form>
+<div id="view" class="d-clear"></div>
+<div class="table-responsive d-table" id="d-fixheight">
+    <table class="table table-hover table-condensed table-striped">
+        <thead>
+        <tr>
+            <th>#</td>
+            <th>Tên chi nhánh</th>
+            <th>Địa chỉ</th>
+            <th>Điện thoại</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(i=0; i<data.length; i++) { %>
+        <tr onclick="infobranch('<%= data[i].id %>');">
+            <td><%= data[i].id %></td>
+            <td><%= data[i].name %></td>
+            <td><%= data[i].address %></td>
+            <td class="col-phone"><%= data[i].phone %></td>
+            <td class="col-action">
+                <i class="fa fa-phone-square ctr-action" aria-hidden="true" onclick="window.location.href = 'mailto:<%= data[i].email %>';"></i>
+                <i class="fa fa-envelope ctr-action" aria-hidden="true" onclick="window.location.href = 'tel:<%= data[i].phone %>';"></i>
+                <i class="fa fa-trash ctr-action" onclick="deletebranch('<%= data[i].id %>');" aria-hidden="true"></i>
+            </td>
+        </tr>
+       <% } %>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5" id="viewmore" onclick="searchbranch()"><i class="fa fa-angle-double-down" aria-hidden="true"></i> xem thêm ...</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+<% } %>
+
+<script>
+    $(document).ready(function(){
+        $("#add").click(function(){
+            $("#key").val("-1");
+        });
+        // check validate
+        $("form[name='f-update']").validate({
+            rules : {
+                namebranch: "required",
+                addressbranch: 'required',
+                phonebranch: {
+                    required: true,
+                    digits: true,
+                    minlength: 10,
+                    maxlength: 20,
+                }
+            },
+            messages : {
+                namebranch: 'Bạn chưa nhập dữ liệu cho trường này!',
+                addressbranch: 'Bạn chưa nhập dữ liệu cho trường này!',
+                phonebranch: {
+                    required: "Bạn chưa nhập dữ liệu cho trường này!",
+                    digits: "Hãy nhập số điện thoại!",
+                    minlength: "Hãy nhập số điện thoại!",
+                    maxlength: "Hãy nhập số điện thoại!",
+                }
+            },
+            submitHandler : function(form) {
+                // form.submit();
+                if($("#key").val() == "-1")
+                    updatebranch(true);
+                else
+                    updatebranch(false);
+            }
+        });
+    });
+</script>

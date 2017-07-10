@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title><%= __('login-title') %></title>
+        <meta name="description" content="Login system">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <base href="http://localhost:3000">
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link href="css/adminstyle.css" rel="stylesheet" />
+        <script src="js/jquery-3.1.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="d-content-login">
+            <img id="img-logo" src="images/image-login.jpg" />
+            <h3 class="head-3"><%= __('login-title') %></h3>
+            <% if(meserr) { %>
+                <div class="bg-danger div-error"><%= meserr %></div>
+            <% } %>
+            <form id="f-login" action="/dang-nhap" method="POST">
+                <label for="username"><%= __('login-label-username') %></label>
+                <input value="root" type="text" class="form-control" id="username" name="username" placeholder="<%= __('login-placeholder-username') %>" />
+                <label for="pass"><%= __('login-label-password') %></label>
+                <input value="12345678" type="password" class="form-control" id="pass" name="pass" placeholder="<%= __('login-placeholder-password') %>" />
+                <button type="submit" class="btn btn-success" id="btn-submit" value="Đăng nhập"><i class="fa fa-check" aria-hidden="true"></i> <%= __('login-button') %></button>
+            </form>
+        </div>
+        
+    </body>
+</html>
