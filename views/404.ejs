@@ -3,6 +3,17 @@
     <head>
         <title><%= __("404-title") %></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <% include files/_header.ejs %>
+        <script>
+            $.ajax({
+                url: "/translate",
+                type: "GET",
+                datatype: "json",
+                success: function(data){
+                    console.log(data);
+                }
+            });
+        </script>
     </head>
     <body>
         <h1><%= __("404-massage") %></h1>

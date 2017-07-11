@@ -125,7 +125,7 @@ function showAlert(tp, tl, ct) {
 // Branch info
 function infobranch(id) {
     $.ajax({
-        url: "/branch/"+id,
+        url: "/chi-nhanh/"+id,
         type: "GET",
         beforeSend: function() {
             $("#d-waiting").show();
@@ -142,7 +142,7 @@ function infobranch(id) {
                 $("#update").removeAttr('disabled');
                 $("#delete").removeAttr('disabled');
                 $("#delete").attr('onclick', "deletebranch("+data.id+");");
-                $("#chitiet").attr('onclick', "window.location.href='info/branch/"+data.id+"'");
+                $("#chitiet").attr('onclick', "window.location.href='thong-tin/chi-nhanh/"+data.id+"'");
             } else {
                 $("#update").attr('disabled', 'true');
                 $("#delete").attr('disabled', 'true');
@@ -157,7 +157,7 @@ function infobranch(id) {
 // Branch search
 function searchbranch() {
     $.ajax({
-        url: "/search/branch",
+        url: "/search/chi-nhanh",
         type: "GET",
         data : {
             index: $('tbody').children('tr').length,
@@ -202,7 +202,7 @@ function deletebranch(id) {
     var btn = confirm("Việc xóa chi nhánh ảnh hưởng đến các ràng buộc cơ sở dữ liệu !!!\n Bạn có muốn tiếp tục xóa nó không?");
     if(btn === true) {
         $.ajax({
-            url: "/delete/branch/"+id,
+            url: "/delete/chi-nhanh/"+id,
             type: "GET",
             beforeSend: function() {
                 $("#d-waiting").show();
@@ -232,7 +232,7 @@ function updatebranch(iadd) {
     }
     console.log(idChange);
     $.ajax({
-        url: "/update/branch",
+        url: "/update/chi-nhanh",
         type: "POST",
         data: {
             id: idChange,

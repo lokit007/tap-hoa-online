@@ -1,30 +1,59 @@
-<strong id="tittle">Thông tin chi nhánh</strong>
+<strong id="tittle"><%= __('branch-tittle') %></strong>
 <% if(session.jurisdiction < 2) { %>
 <form action="#" name='f-update' method="POST" autocomplete="on">
-    <input type="hidden" id="key" name="key" value="-1" />
-    <input type="text" id="name" name="namebranch" class="search-control form-control ctr-1x" data="branch" title="Tên chi nhánh hoặc điều kiện tìm kiếm dữ liệu" placeholder="(*) Nhập tên chi nhánh hoặc điều kiện tìm kiếm ..." />
-    <input type="text" id="address" class="form-control ctr-1x" name="addressbranch"  title="Địa chỉ chi nhánh" placeholder="(*) Địa chỉ ..." />
+    <input type="hidden" 
+        id="key" name="key" 
+        value="-1" />
+    <input type="text" 
+        id="name" name="namebranch" 
+        class="search-control form-control ctr-1x" 
+        data="branch" 
+        title="<%= __('branch-input-search-tittle') %>" 
+        placeholder="<%= __('branch-input-search-placeholder') %>" />
+    <input type="text" 
+        id="address" name="addressbranch"
+        class="form-control ctr-1x" 
+        title="<%= __('branch-input-address-tittle') %>" 
+        placeholder="<%= __('branch-input-address-placeholder') %>" />
     <div>
         <div class="ctr-3x">
-            <input type="tel" id="phone" class="form-control" name="phonebranch"  title="Số điện thoại" maxlength="11" placeholder="(*) Số điện thoại ..." />
+            <input type="tel" 
+                id="phone" name="phonebranch" maxlength="11" 
+                class="form-control" 
+                title="<%= __('branch-input-phone-tittle') %>" 
+                placeholder="<%= __('branch-input-phone-placeholder') %>" />
         </div>
         <div class="ctr-3x">
-            <input type="email" id="email" class="form-control" name="emailbranch" title="Email" maxlength="30" placeholder="Email ..." />
+            <input type="email" 
+                id="email" name="emailbranch" maxlength="30"
+                class="form-control" 
+                title="<%= __('branch-input-email-tittle') %>" 
+                placeholder="<%= __('branch-input-email-placeholder') %>" />
         </div>
         <div class="ctr-3x">
-            <input type="text" id="fax" class="form-control" name="faxbranch" title="Fax" maxlength="11" placeholder="Số fax ..." />
+            <input type="text" 
+                id="fax" name="faxbranch" maxlength="11" 
+                class="form-control" 
+                title="<%= __('branch-input-fax-tittle') %>" 
+                placeholder="<%= __('branch-input-fax-placeholder') %>" />
         </div>    
         <div class="ctr-3x" style="float: right !important; margin-right: 10px;">
-            <span id="chitiet" class="fa-stack fa-lg" style="cursor: pointer;" title="Xem chi tiết">
+            <span id="chitiet" class="fa-stack fa-lg" style="cursor: pointer;" title="<%= __('branch-button-info-tittle') %>">
                 <i class="fa fa-square-o fa-stack-2x"></i>
                 <i class="fa fa-info fa-stack-1x"></i>
             </span>
         </div>
         <div class="d-clear"></div>
     </div>
-    <button type="button" id="delete" class="btn btn-danger btn-sm ctr-btn" disabled><i class="fa fa-trash-o" aria-hidden="true"></i> Xóa Chi nhánh</button>
-    <button type="submit" id="update" class="btn btn-success btn-sm ctr-btn" disabled><i class="fa fa-check" aria-hidden="true"></i> Cập nhật lại</button>
-    <button type="submit" id="add" class="btn btn-primary btn-sm ctr-btn"><i class="fa fa-plus" aria-hidden="true"></i> Thêm Chi nhánh</button>
+    <button type="button" id="delete" class="btn btn-danger btn-sm ctr-btn" disabled>
+        <i class="fa fa-trash-o" aria-hidden="true"></i> <%= __('branch-button-delete-tittle') %>
+    </button>
+    <button type="submit" id="update" class="btn btn-success btn-sm ctr-btn" disabled>
+        <i class="fa fa-check" aria-hidden="true"></i> <%= __('branch-button-update-tittle') %>
+    </button>
+    <button type="submit" id="add" class="btn btn-primary btn-sm ctr-btn">
+        <i class="fa fa-plus" aria-hidden="true"></i> <%= __('branch-button-add-tittle') %>
+    </button>
 </form>
 <div id="view" class="d-clear"></div>
 <div class="table-responsive d-table" id="d-fixheight">
@@ -32,9 +61,9 @@
         <thead>
         <tr>
             <th>#</td>
-            <th>Tên chi nhánh</th>
-            <th>Địa chỉ</th>
-            <th>Điện thoại</th>
+            <th><%= __('branch-table-name-tittle') %></th>
+            <th><%= __('branch-table-address-tittle') %></th>
+            <th><%= __('branch-table-email-tittle') %></th>
             <th></th>
         </tr>
         </thead>
@@ -46,16 +75,24 @@
             <td><%= data[i].address %></td>
             <td class="col-phone"><%= data[i].phone %></td>
             <td class="col-action">
-                <i class="fa fa-phone-square ctr-action" aria-hidden="true" onclick="window.location.href = 'mailto:<%= data[i].email %>';"></i>
-                <i class="fa fa-envelope ctr-action" aria-hidden="true" onclick="window.location.href = 'tel:<%= data[i].phone %>';"></i>
-                <i class="fa fa-trash ctr-action" onclick="deletebranch('<%= data[i].id %>');" aria-hidden="true"></i>
+                <i class="fa fa-phone-square ctr-action" aria-hidden="true" 
+                    onclick="window.location.href = 'mailto:<%= data[i].phone %>';"
+                    title="<%= __('branch-table-icon-phone') %>"></i>
+                <i class="fa fa-envelope ctr-action" aria-hidden="true" 
+                    onclick="window.location.href = 'tel:<%= data[i].email %>';"
+                    title="<%= __('branch-table-icon-email') %>"></i>
+                <i class="fa fa-trash ctr-action" aria-hidden="true"
+                    onclick="deletebranch('<%= data[i].id %>');" 
+                    title="<%= __('branch-table-icon-delete') %>"></i>
             </td>
         </tr>
        <% } %>
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="5" id="viewmore" onclick="searchbranch()"><i class="fa fa-angle-double-down" aria-hidden="true"></i> xem thêm ...</td>
+                <td colspan="5" id="viewmore" onclick="searchbranch()">
+                    <i class="fa fa-angle-double-down" aria-hidden="true"></i> <%= __('branch-table-icon-view') %>
+                </td>
             </tr>
         </tfoot>
     </table>
@@ -80,10 +117,10 @@
                 }
             },
             messages : {
-                namebranch: 'Bạn chưa nhập dữ liệu cho trường này!',
-                addressbranch: 'Bạn chưa nhập dữ liệu cho trường này!',
+                namebranch: <%= __('branch-input-error') %>,
+                addressbranch: <%= __('branch-input-error') %>,
                 phonebranch: {
-                    required: "Bạn chưa nhập dữ liệu cho trường này!",
+                    required: <%= __('branch-input-error') %>,
                     digits: "Hãy nhập số điện thoại!",
                     minlength: "Hãy nhập số điện thoại!",
                     maxlength: "Hãy nhập số điện thoại!",

@@ -11,6 +11,7 @@ let Db = require("./models/database.js");
 let configI18n = require("./config/i18n-config.js");
 let configData = require("./config/connection-data.js");
 let urls = jsonfile.readFileSync('./urls.json');
+let obj = {};
 
 // Biến môi trường
 let app = express();
@@ -37,21 +38,21 @@ app.use(session({
 }));
 app.use(i18n.init);
 app.use(function(req, res, next){
-    let method = urls[req.path];
-    if(method != req.method) res.render("404");
-    else {
-        if(req.query.lang) i18n.setLocale(req.query.lang);
-        res.locals.clanguage = req.getLocale();
-        res.locals.languages = i18n.getLocales();
-
-        if(req.path == "/dang-nhap") {
+    let lang = "vi";
+    if(req.query.lang) {
+        i18n.setLocale(req.query.lang);
+        lang = req.query.lang;
+    }
+    res.locals.clanguage = req.getLocale();
+    res.locals.languages = i18n.getLocales();
+    obj = jsonfile.readFileSync('./config/languages/'+lang+'.json');
+    if(req.path == "/dang-nhap") {
+        next();
+    } else {
+        if(req.session.login === "true") {
             next();
         } else {
-            if(req.session.login === "true") {
-                next();
-            } else {
-                res.render("login", { 'meserr' : "" });
-            }
+            res.render("login", { 'meserr' : "" });
         }
     }
 });
@@ -118,5 +119,12 @@ app.get("/dang-xuat", function(req, res, next){
     res.render("login", { 'meserr' : "" });
 });
 
+app.get("/error", function(req, res){
+    res.render("404");
+});
+
+app.get("/translate", function(req, res){
+    res.send(obj);
+});
 // Thêm route
 var routeBranch = require("./routes/branch.js")(app, pool);
