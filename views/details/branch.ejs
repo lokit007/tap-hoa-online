@@ -1,6 +1,6 @@
 <strong id="tittle"><%= __('branch-tittle') %></strong>
 <% if(session.jurisdiction < 2) { %>
-<form action="#" name='f-update' method="POST" autocomplete="on">
+<form action="#" name='branch-update' method="POST" autocomplete="on">
     <input type="hidden" 
         id="key" name="key" 
         value="-1" />
@@ -98,41 +98,3 @@
     </table>
 </div>
 <% } %>
-
-<script>
-    $(document).ready(function(){
-        $("#add").click(function(){
-            $("#key").val("-1");
-        });
-        // check validate
-        $("form[name='f-update']").validate({
-            rules : {
-                namebranch: "required",
-                addressbranch: 'required',
-                phonebranch: {
-                    required: true,
-                    digits: true,
-                    minlength: 10,
-                    maxlength: 20,
-                }
-            },
-            messages : {
-                namebranch: <%= __('branch-input-error') %>,
-                addressbranch: <%= __('branch-input-error') %>,
-                phonebranch: {
-                    required: <%= __('branch-input-error') %>,
-                    digits: "Hãy nhập số điện thoại!",
-                    minlength: "Hãy nhập số điện thoại!",
-                    maxlength: "Hãy nhập số điện thoại!",
-                }
-            },
-            submitHandler : function(form) {
-                // form.submit();
-                if($("#key").val() == "-1")
-                    updatebranch(true);
-                else
-                    updatebranch(false);
-            }
-        });
-    });
-</script>

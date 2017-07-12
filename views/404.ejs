@@ -5,13 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <% include files/_header.ejs %>
         <script>
-            $.ajax({
-                url: "/translate",
-                type: "GET",
-                datatype: "json",
-                success: function(data){
-                    console.log(data);
-                }
+            function a(){
+                alert(i18n['404-title']);
+            }
+            $(document).ready(function(){
+                a();
             });
         </script>
     </head>

@@ -1,6 +1,8 @@
 {
     "404-title": "Lỗi truy cập trang",
     "404-massage": "Lỗi truy cập trang",
+    "404-connection-system-title": "Lỗi kết nối hệ thống",
+    "404-connection-system-content": "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.",
     "login-title": "Đăng nhập hệ thống",
     "login-label-username": "Tên đăng nhập",
     "login-placeholder-username": "Nhập tại đây ...",
@@ -10,6 +12,7 @@
     "login-massage-error": "Tên đăng nhập hoặc mật khẩu không chính xác!!!",
     "branch-tittle": "Thông tin chi nhánh",
     "branch-input-error": "Bạn chưa nhập dữ liệu cho trường này!",
+    "branch-input-phone-error": "Không phải số điện thoại!",
     "branch-input-search-tittle": "Tên chi nhánh hoặc điều kiện tìm kiếm dữ liệu",
     "branch-input-search-placeholder": "(*) Tên chi nhánh hoặc điều kiện tìm kiếm ...",
     "branch-input-address-tittle": "Địa chỉ chi nhánh",

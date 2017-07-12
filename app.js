@@ -11,7 +11,7 @@ let Db = require("./models/database.js");
 let configI18n = require("./config/i18n-config.js");
 let configData = require("./config/connection-data.js");
 let urls = jsonfile.readFileSync('./urls.json');
-let obj = {};
+
 
 // Biến môi trường
 let app = express();
@@ -19,6 +19,8 @@ let post = process.env.PORT || 3000;
 let host = "localhost";
 let lsAdmin = [];
 let pool = mysql.createPool(configData.dataonline);
+let obj = {};
+let lang = "vi";
 
 // Cấu hình
 app.set('views', __dirname + '/views');
@@ -38,7 +40,6 @@ app.use(session({
 }));
 app.use(i18n.init);
 app.use(function(req, res, next){
-    let lang = "vi";
     if(req.query.lang) {
         i18n.setLocale(req.query.lang);
         lang = req.query.lang;

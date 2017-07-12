@@ -1,3 +1,15 @@
+// Biến môi trường
+var i18n = {};
+// Các hàm xử lý chung cho các page
+$.ajax({
+    url: "/translate",
+    type: "GET",
+    datatype: "json",
+    success: function(data){
+        i18n = data;
+    }
+});
+// Xử lý khi trang load hoàn tất
 $(document).ready(function(){
     // Xu ly menu
     $("#menu").click(function(){
@@ -104,8 +116,12 @@ $(document).ready(function(){
         }
     });
 });
-
-// Show Message alert
+/**
+ * Alert design : Gọi để hiển thị alert
+ * @param {* Trạng thái : error/warning/success} tp
+ * @param {* Nhãn của alert} tl 
+ * @param {* Nội dung alert} ct 
+ */
 function showAlert(tp, tl, ct) {
     if(tp === "error") {
         $("#md-div").attr("class", "modal-content modal-error");
@@ -121,8 +137,44 @@ function showAlert(tp, tl, ct) {
     $("#md-content").text(ct);
     $("#mdShowMes").modal('show');
 }
+// Chi nhánh
+$(document).ready(function(){
+    $("#add").click(function(){
+        eModal.confirm("Nội dung tn", "Nội dung n").then(function() { alert("Click ok"); }, null);
+        $("#key").val("-1");
+    });
+    // check validate
+    $("form[name='branch-update']").validate({
+        rules : {
+            namebranch: "required",
+            addressbranch: 'required',
+            phonebranch: {
+                required: true,
+                digits: true,
+                minlength: 10,
+                maxlength: 20,
+            }
+        },
+        messages : {
+            namebranch: i18n['branch-input-error'],
+            addressbranch: i18n['branch-input-error'],
+            phonebranch: {
+                required: i18n['branch-input-error'],
+                digits: i18n['branch-input-phone-error'],
+                minlength: i18n['branch-input-phone-error'],
+                maxlength: i18n['branch-input-phone-error'],
+            }
+        },
+        submitHandler : function(form) {
+            if($("#key").val() == "-1")
+                updatebranch(true);
+            else
+                updatebranch(false);
+        }
+    });
+});
 
-// Branch info
+// Thông tin chi nhánh
 function infobranch(id) {
     $.ajax({
         url: "/chi-nhanh/"+id,
@@ -150,7 +202,7 @@ function infobranch(id) {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
         }
     });
 }
@@ -193,7 +245,7 @@ function searchbranch() {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
         }
     });
 }
@@ -213,12 +265,12 @@ function deletebranch(id) {
                     alert("Đã xóa thành công chi nhánh.");
                     window.location.reload(true);  
                 } else {
-                    showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
                 }
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
             }
         });
     }
@@ -250,15 +302,17 @@ function updatebranch(iadd) {
             if (dataChange === "Success") {
                 showAlert('success', "Cập nhật chi nhánh", "Đã cập nhật thành công chi nhánh."); 
             } else {
-                showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
             }
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
         }
     });
 }
+
+// Danh mục
 
 // Category info
 function infocategory(id) {
@@ -284,7 +338,7 @@ function infocategory(id) {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
         }
     });
 }
@@ -324,7 +378,7 @@ function searchcategory() {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
         }
     });
 }
@@ -343,12 +397,12 @@ function deletecategory(id) {
                 if (data === "Success") { 
                     showAlert('success', " Xóa dữ liệu", "Đã xóa thành công danh mục.");
                 } else {
-                    showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
                 }
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
             }
         });
     }
@@ -395,11 +449,11 @@ function updatecategory(iadd) {
                                 if (dataChange === "Success") { 
                                     showAlert('success', " Cập nhật dữ liệu", "Đã cập nhật thành công danh mục.");
                                 } else {
-                                    showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
                                 }
                             },
                             error: function(){
-                                showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
                             }
                         });
                     }
@@ -407,12 +461,14 @@ function updatecategory(iadd) {
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
             }
         });
     }
     
 }
+
+// Đối tác
 
 // Show Model
 function showmodelpersonnel(sel) {
@@ -452,12 +508,12 @@ function showmodelpersonnel(sel) {
                     $("#myModalLabel").val("Thông tin chi tiết của nhân viên");  
                     $('#myModal').modal('show');  
                 } else {
-                    showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
                 }
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
             }
         });
     }
@@ -495,7 +551,7 @@ function infopersonnel(id) {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
         }
     });
 }
@@ -543,7 +599,7 @@ function searchpersonnel() {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
         }
     });
 }
@@ -562,12 +618,12 @@ function deletepersonnel(id) {
                 if (data === "Success") {  
                     showAlert('success', "Xóa nhân viên", "Đã xóa thành công nhân viên.");
                 } else {
-                    showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
                 }
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
             }
         });
     }
@@ -602,17 +658,18 @@ function updatepersonnel(iadd) {
             if (dataChange === "Success") {
                 showAlert('success', "Cập nhật dữ liệu", "Đã cập nhật thành công nhân viên.");  
             } else {
-                showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
             }
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
         }
     });
 }
 
-// partner
+// Kho hành
+
 // Show Model
 function showmodelpartner(sel) {
     if(sel == 0) {
@@ -651,12 +708,12 @@ function showmodelpartner(sel) {
                     $("#myModalLabel").val("Thông tin chi tiết của nhân viên");  
                     $('#myModal').modal('show');  
                 } else {
-                    showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
                 }
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
             }
         });
     }
@@ -689,7 +746,7 @@ function infopartner(id) {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
         }
     });
 }
@@ -735,7 +792,7 @@ function searchpartner() {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
         }
     });
 }
@@ -754,12 +811,12 @@ function deletepartner(id) {
                 if (data === "Success") {
                     showAlert('success', "Xóa dữ liệu", "Đã xóa thành công đối tác.");
                 } else {
-                    showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
                 }
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
             }
         });
     }
@@ -792,12 +849,12 @@ function updatepartner(iadd) {
                 window.location.reload(true);  
                 showAlert('success', "Cập nhật dữ liệu", "Đã cập nhật đối tác thành công.");
             } else {
-                showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
             }
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', " Lỗi kết nối hệ thống", "Không cập nhật được cơ sở dữ liệu!!!\nVui lòng thao tác lại sau.");
+            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
         }
     });
 }
