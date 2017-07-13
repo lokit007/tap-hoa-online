@@ -41,3 +41,6 @@ app.get("/", function(req, res, next){
     console.log(__('404-title'));
     res.render('404');
 });
+app.get("/emodel", function(req, res, next){
+    res.render('eModel');
+});

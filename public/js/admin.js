@@ -202,7 +202,7 @@ function infobranch(id) {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+            eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
         }
     });
 }
@@ -245,14 +245,14 @@ function searchbranch() {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+            eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
         }
     });
 }
 // Branch delete
 function deletebranch(id) {
-    var btn = confirm("Việc xóa chi nhánh ảnh hưởng đến các ràng buộc cơ sở dữ liệu !!!\n Bạn có muốn tiếp tục xóa nó không?");
-    if(btn === true) {
+    eModal.confirm(i18n['branch-confirm-delete-message'], i18n['delete-data-system'])
+    .then(() => {
         $.ajax({
             url: "/delete/chi-nhanh/"+id,
             type: "GET",
@@ -262,18 +262,18 @@ function deletebranch(id) {
             success: function(data){
                 $("#d-waiting").hide();
                 if (data === "Success") {
-                    alert("Đã xóa thành công chi nhánh.");
+                    eModal.alert(i18n['branch-alert-delete-message-success'], i18n['delete-data-system']);
                     window.location.reload(true);  
                 } else {
-                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                    eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
                 }
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
             }
         });
-    }
+    }, null);
 }
 // Update branch
 function updatebranch(iadd) {
@@ -282,7 +282,6 @@ function updatebranch(iadd) {
     if(iadd !== true) {
         idChange = $("#key").val();
     }
-    console.log(idChange);
     $.ajax({
         url: "/update/chi-nhanh",
         type: "POST",
@@ -300,14 +299,15 @@ function updatebranch(iadd) {
         success: function(dataChange){
             $("#d-waiting").hide();
             if (dataChange === "Success") {
-                showAlert('success', "Cập nhật chi nhánh", "Đã cập nhật thành công chi nhánh."); 
+                eModal.alert(i18n['branch-alert-update-message-success'], i18n['update-data-system']);
+                window.location.reload(true);
             } else {
-                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
             }
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+            eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
         }
     });
 }
@@ -338,7 +338,7 @@ function infocategory(id) {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+            eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
         }
     });
 }
@@ -378,7 +378,7 @@ function searchcategory() {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+            eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
         }
     });
 }
@@ -397,12 +397,12 @@ function deletecategory(id) {
                 if (data === "Success") { 
                     showAlert('success', " Xóa dữ liệu", "Đã xóa thành công danh mục.");
                 } else {
-                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                    eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
                 }
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
             }
         });
     }
@@ -449,11 +449,11 @@ function updatecategory(iadd) {
                                 if (dataChange === "Success") { 
                                     showAlert('success', " Cập nhật dữ liệu", "Đã cập nhật thành công danh mục.");
                                 } else {
-                                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                                    eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
                                 }
                             },
                             error: function(){
-                                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                                eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
                             }
                         });
                     }
@@ -461,7 +461,7 @@ function updatecategory(iadd) {
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
             }
         });
     }
@@ -508,12 +508,12 @@ function showmodelpersonnel(sel) {
                     $("#myModalLabel").val("Thông tin chi tiết của nhân viên");  
                     $('#myModal').modal('show');  
                 } else {
-                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                    eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
                 }
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
             }
         });
     }
@@ -551,7 +551,7 @@ function infopersonnel(id) {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+            eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
         }
     });
 }
@@ -599,7 +599,7 @@ function searchpersonnel() {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+            eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
         }
     });
 }
@@ -618,12 +618,12 @@ function deletepersonnel(id) {
                 if (data === "Success") {  
                     showAlert('success', "Xóa nhân viên", "Đã xóa thành công nhân viên.");
                 } else {
-                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                    eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
                 }
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
             }
         });
     }
@@ -658,12 +658,12 @@ function updatepersonnel(iadd) {
             if (dataChange === "Success") {
                 showAlert('success', "Cập nhật dữ liệu", "Đã cập nhật thành công nhân viên.");  
             } else {
-                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
             }
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+            eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
         }
     });
 }
@@ -708,12 +708,12 @@ function showmodelpartner(sel) {
                     $("#myModalLabel").val("Thông tin chi tiết của nhân viên");  
                     $('#myModal').modal('show');  
                 } else {
-                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                    eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
                 }
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
             }
         });
     }
@@ -746,7 +746,7 @@ function infopartner(id) {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+            eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
         }
     });
 }
@@ -792,7 +792,7 @@ function searchpartner() {
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+            eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
         }
     });
 }
@@ -811,12 +811,12 @@ function deletepartner(id) {
                 if (data === "Success") {
                     showAlert('success', "Xóa dữ liệu", "Đã xóa thành công đối tác.");
                 } else {
-                    showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                    eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
                 }
             },
             error: function(){
                 $("#d-waiting").hide();
-                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
             }
         });
     }
@@ -849,12 +849,12 @@ function updatepartner(iadd) {
                 window.location.reload(true);  
                 showAlert('success', "Cập nhật dữ liệu", "Đã cập nhật đối tác thành công.");
             } else {
-                showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+                eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
             }
         },
         error: function(){
             $("#d-waiting").hide();
-            showAlert('error', i18n['404-connection-system-title'], i18n['404-connection-system-content']);
+            eModal.alert(i18n['404-connection-system-content'], i18n['404-connection-system-title']);
         }
     });
 }
