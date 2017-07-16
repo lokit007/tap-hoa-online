@@ -129,3 +129,7 @@ app.get("/translate", function(req, res){
 });
 // Thêm route
 var routeBranch = require("./routes/branch.js")(app, pool);
+var routeCategory = require("./routes/category.js")(app, pool);
+var routePartner = require("./routes/partner.js")(app, pool);
+var routePersonnel = require("./routes/personnel.js")(app, pool);
+var routeWarehouse = require("./routes/warehouse.js")(app, pool);

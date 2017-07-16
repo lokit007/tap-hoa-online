@@ -5,7 +5,7 @@ let Db = require("../models/database.js");
 // Định nghĩa route
 let RoutePartner = function(app, pool) {
     // Danh sách khởi tạo
-    app.get('/partner', function(req, res){
+    app.get('/doi-tac', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "select IdSupplier, ContactName, ContactPhone, ContactEmail, Address, UserId ";
@@ -20,20 +20,20 @@ let RoutePartner = function(app, pool) {
                     for(let i=0; i<results.length; i++) {
                         objList.push(new Partner(results[i].IdSupplier, results[i].ContactName, results[i].ContactPhone, results[i].ContactEmail, results[i].Address, results[i].UserId));
                     }
-                    res.render("home", {screen: 3, session: session, data : objList});
+                    res.render("template", {screen: 3, session: session, data : objList});
                 } else {
-                    res.render("home", {screen: 3, session: session, data : {}});
+                    res.render("template", {screen: 3, session: session, data : {}});
                 }
             })
             .catch(error => {
-                res.render("home", {screen: 3, session: session, data : {}});
+                res.render("template", {screen: 3, session: session, data : {}});
             })
         } catch (error) {
-            res.render("home", {screen: 3, session: session, data : {}});
+            res.render("template", {screen: 3, session: session, data : {}});
         }
     });
     // Thông tin chi tiết
-    app.get('/partner/:id', function(req, res){
+    app.get('/doi-tac/:id', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "select IdSupplier, ContactName, ContactPhone, ContactEmail, Address, UserId, FullName ";
@@ -59,7 +59,7 @@ let RoutePartner = function(app, pool) {
         }
     });
     // Danh sách tìm kiếm
-    app.get('/search/partner', function(req, res){
+    app.get('/search/doi-tac', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "select IdSupplier, ContactName, ContactPhone, ContactEmail, Address, UserId, FullName ";
@@ -95,7 +95,7 @@ let RoutePartner = function(app, pool) {
         }
     });
     // Cập nhật dữ liệu
-    app.post('/update/partner', function(req, res){
+    app.post('/update/doi-tac', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "";
@@ -159,7 +159,7 @@ let RoutePartner = function(app, pool) {
         }
     });
     // Xóa dữ liệu
-    app.get('/delete/partner/:id', function(req, res){
+    app.get('/delete/doi-tac/:id', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "DELETE FROM `user` WHERE IdUser=?";

@@ -26,16 +26,16 @@ $(document).ready(function(){
            var sel = $(this).attr("data");
            switch(sel) {
                 case "1":
-                    window.location.href = './personnel';
+                    window.location.href = './nhan-vien';
                     break;
                 case "2":
-                    window.location.href = './category';
+                    window.location.href = './danh-muc';
                     break;
                 case "3":
-                    window.location.href = './partner';
+                    window.location.href = './doi-tac';
                     break;
                 case "4":
-                    window.location.href = './warehouse';
+                    window.location.href = './kho-hang';
                     break;
                 case "5":
                     window.location.href = './statistical';
@@ -44,7 +44,7 @@ $(document).ready(function(){
                     window.location.href = './message';
                     break;
                 default:
-                    window.location.href = './branch';
+                    window.location.href = './chi-nhanh';
             }
        }
    });

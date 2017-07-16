@@ -5,7 +5,7 @@ let Db = require("../models/database.js");
 // Route
 let RoutePersonnel = function(app, pool) {
     // Mới khởi tạo
-    app.get('/personnel', function(req, res){
+    app.get('/nhan-vien', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "select UserName, PassWord, IdentityCard, TotalSalary, ";
@@ -25,20 +25,20 @@ let RoutePersonnel = function(app, pool) {
                     for(let i=0; i<results.length; i++) {
                         objList.push(new Personnel(results[i].UserName, results[i].PassWord, results[i].IdentityCard, results[i].TotalSalary, results[i].UserId, results[i].FullName, results[i].Address, results[i].Phone, results[i].Email, results[i].BranchId, results[i].NameBranch, results[i].JurisdictionId, results[i].NameJurisdiction, results[i].Description));
                     }
-                    res.render("home", {screen: 1, session: session, data : objList});
+                    res.render("template", {screen: 1, session: session, data : objList});
                 } else {
-                    res.render("home", {screen: 1, session: session, data : {}});
+                    res.render("template", {screen: 1, session: session, data : {}});
                 }
             })
             .catch(error => {
-                res.render("home", {screen: 1, session: session, data : {}});
+                res.render("template", {screen: 1, session: session, data : {}});
             });
         } catch (error) {
-            res.render("home", {screen: 1, session: session, data : {}});
+            res.render("template", {screen: 1, session: session, data : {}});
         } 
     });
     // Thông tin theo id
-    app.get('/personnel/:id', function(req, res){
+    app.get('/nhan-vien/:id', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "select UserName, PassWord, IdentityCard, TotalSalary, ";
@@ -69,7 +69,7 @@ let RoutePersonnel = function(app, pool) {
         }
     });
     // Search
-    app.get('/search/personnel', function(req, res){
+    app.get('/search/nhan-vien', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "select UserName, PassWord, IdentityCard, TotalSalary, ";
@@ -111,7 +111,7 @@ let RoutePersonnel = function(app, pool) {
         } 
     });
     // Update
-    app.post('/update/personnel', function(req, res){
+    app.post('/update/nhan-vien', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "";
@@ -177,7 +177,7 @@ let RoutePersonnel = function(app, pool) {
         }
     });
     // Delete
-    app.get('/delete/personnel/:id', function(req, res){
+    app.get('/delete/nhan-vien/:id', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "DELETE FROM `admin` WHERE UserName=?";

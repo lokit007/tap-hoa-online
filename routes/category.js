@@ -5,7 +5,7 @@ let Db = require("../models/database.js");
 // Định nghĩa route
 let RouteCategory = function(app, pool) {
     // Danh sách category mới khởi tạo
-    app.get('/category', function(req, res){
+    app.get('/danh-muc', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = `select IdCategory, category.Name, Description, State, Count(IdProduct) as NumberProduct, BranchId, NameBranch from category 
@@ -25,20 +25,20 @@ let RouteCategory = function(app, pool) {
                     for(let i=0; i<results.length; i++) {
                         objList.push(new Category(results[i].IdCategory, results[i].Name, results[i].Description, results[i].State, results[i].NumberProduct));
                     }
-                     res.render("home", {screen: 2, session: session, data : objList});
+                     res.render("template", {screen: 2, session: session, data : objList});
                 } else {
-                     res.render("home", {screen: 2, session: session, data : {}});
+                     res.render("template", {screen: 2, session: session, data : {}});
                 }
             })
             .catch(error => {
-                res.render("home", {screen: 2, session: session, data : {}});
+                res.render("template", {screen: 2, session: session, data : {}});
             });
         } catch (error) {
-            res.render("home", {screen: 2, session: session, data : {}});
+            res.render("template", {screen: 2, session: session, data : {}});
         }
     });
     // Lấy thông tin một danh mục
-    app.get('/category/:id', function(req, res){
+    app.get('/danh-muc/:id', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = `select IdCategory, category.Name, Description, State, Count(IdProduct) as NumberProduct, BranchId, NameBranch from category 
@@ -71,7 +71,7 @@ let RouteCategory = function(app, pool) {
         }
     });
     // Lấy danh sách danh mục tìm kiếm autocomplex
-    app.get('/search/category', function(req, res){
+    app.get('/search/danh-muc', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = `select IdCategory, category.Name, Description, State, Count(IdProduct) as NumberProduct, BranchId, NameBranch from category 
@@ -107,7 +107,7 @@ let RouteCategory = function(app, pool) {
         }
     });
     // Thêm, cập nhật một category
-    app.post('/update/category', function(req, res){
+    app.post('/update/danh-muc', function(req, res){
         let objDb = new Db(pool);
         let sql = "";
         let obj = {};
@@ -154,7 +154,7 @@ let RouteCategory = function(app, pool) {
         }
     });
     // Xóa category
-    app.get('/delete/category/:id', function(req, res){
+    app.get('/delete/danh-muc/:id', function(req, res){
         let objDb = new Db(pool);
         let sql = "delete from `category` where IdCategory=?";
         let sql1 = "delete from `product` where CategoryId=?";

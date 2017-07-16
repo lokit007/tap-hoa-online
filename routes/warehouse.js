@@ -5,7 +5,7 @@ let Db = require("../models/database.js");
 // Route
 let RouteWarehouse = function(app, pool) {
     // Mới khởi tạo
-    app.get('/warehouse', function(req, res){
+    app.get('/kho-hang', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "select BranchId, NameBranch as BranchName, ProductId, product.Name as ProductName, ";
@@ -23,20 +23,20 @@ let RouteWarehouse = function(app, pool) {
                     for(let i=0; i<results.length; i++) {
                         objList.push(new Warehouse(results[i].BranchId, results[i].BranchName, results[i].ProductId, results[i].ProductName, results[i].Price, results[i].NewNumber, results[i].NewPrice, results[i].OldNumber, results[i].OldPrice, results[i].CategoryId, results[i].CategoryName));
                     }
-                    res.render("home", {screen: 4, session: session, data : objList});
+                    res.render("template", {screen: 4, session: session, data : objList});
                 } else {
-                    res.render("home", {screen: 4, session: session, data : {}});
+                    res.render("template", {screen: 4, session: session, data : {}});
                 }
             })
             .catch(error => {
-                res.render("home", {screen: 4, session: session, data : {}});
+                res.render("template", {screen: 4, session: session, data : {}});
             });
         } catch (errorall) {
             res.redirect("error");
         }
     });
     // Thông tin theo id
-    app.get('/warehouse/:id', function(req, res){
+    app.get('/kho-hang/:id', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "select UserName, PassWord, IdentityCard, TotalSalary, ";
@@ -67,7 +67,7 @@ let RouteWarehouse = function(app, pool) {
         }
     });
     // Search
-    app.get('/search/warehouse', function(req, res){
+    app.get('/search/kho-hang', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "select BranchId, NameBranch as BranchName, ProductId, product.Name as ProductName, ";
@@ -107,7 +107,7 @@ let RouteWarehouse = function(app, pool) {
         } 
     });
     // Update
-    app.post('/update/warehouse', function(req, res){
+    app.post('/update/kho-hang', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "";
@@ -213,7 +213,7 @@ let RouteWarehouse = function(app, pool) {
         });
     });
     // Delete
-    app.get('/delete/warehouse/:id', function(req, res){
+    app.get('/delete/kho-hang/:id', function(req, res){
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "DELETE FROM `admin` WHERE UserName=?";
@@ -245,7 +245,7 @@ let RouteWarehouse = function(app, pool) {
         }
     });
     // Load data
-    app.get('/loaddata/warehouse', function(req, res) {
+    app.get('/loaddata/kho-hang', function(req, res) {
         let objDb = new Db(pool);
         let session = req.session.admin;
         let sql = "select * from branch; ";
@@ -269,7 +269,7 @@ let RouteWarehouse = function(app, pool) {
         }
     });
     // import data excel
-    app.post('/importexcel/warehouse', function(req, res){
+    app.post('/importexcel/kho-hang', function(req, res){
         let arrlist = JSON.parse(req.body.listproduct);
         let sql = "";
         let obj = [];
